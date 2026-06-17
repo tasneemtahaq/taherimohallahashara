@@ -1,65 +1,105 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useCallback } from "react";
+import OpeningAnimation  from "./components/OpeningAnimation";
+import ParticleBackground from "./components/ParticleBackground";
+import Navbar            from "./components/Navbar";
+import HeroSection       from "./components/HeroSection";
+import DepartmentSection from "./components/DepartmentSection";
+import Footer            from "./components/Footer";
+import TopBanner from "./components/TopBanner";
+
+const DEPARTMENTS = [
+  {
+    id:          "mawaid",
+    number:      "01 — Mawaid",
+    title:       "Mawaid",
+    subtitle:    "Community Meals",
+    description: "Managing community meals, food distribution, and event arrangements efficiently. From planning menus to ensuring every guest is served with warmth and dignity — Mawaid is the heart of communal nourishment.",
+    tags:        ["Dining", "Events", "Community"],
+    imageSrc:    "https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80",
+    imageAlt:    "Community dining and meals",
+    reverse:     false,
+  },
+  {
+    id:          "bgt",
+    number:      "02 — BGT",
+    title:       "BGT",
+    subtitle:    "Planning & Coordination",
+    description: "Supporting community operations through organized planning and coordination. BGT drives strategy, manages resources, and ensures every department runs with precision, purpose, and long-term vision.",
+    tags:        ["Strategy", "Planning", "Operations"],
+    imageSrc:    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+    imageAlt:    "Business planning and coordination",
+    reverse:     true,
+  },
+  {
+    id:          "microom",
+    number:      "03 — Mic Room",
+    title:       "Mic Room",
+    subtitle:    "Audio & Communication",
+    description: "Handling audio systems, announcements, and event communication. The Mic Room ensures every word is heard clearly, every announcement lands powerfully, and every event resonates with sonic excellence.",
+    tags:        ["Audio", "Media", "Broadcast"],
+    imageSrc:    "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    imageAlt:    "Audio equipment and microphone setup",
+    reverse:     false,
+  },
+  {
+    id:          "nazafat",
+    number:      "04 — Nazafat",
+    title:       "Nazafat",
+    subtitle:    "Cleanliness & Hygiene",
+    description: "Maintaining cleanliness, hygiene, and organized surroundings. Rooted in the belief that a clean environment reflects a clean spirit, Nazafat ensures every space is spotless, welcoming, and dignified.",
+    tags:        ["Hygiene", "Standards", "Maintenance"],
+    imageSrc:    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+    imageAlt:    "Clean and organized space",
+    reverse:     true,
+  },
+  {
+    id:          "tazeen",
+    number:      "05 — Tazeen",
+    title:       "Tazeen",
+    subtitle:    "Décor & Beautification",
+    description: "Creating beautiful decorations and enhancing event environments. Tazeen transforms ordinary spaces into extraordinary experiences through floral arrangements, fabric draping, lighting design, and thematic installations.",
+    tags:        ["Décor", "Design", "Aesthetics"],
+    imageSrc:    "https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=800&q=80",
+    imageAlt:    "Beautiful event decoration",
+    reverse:     false,
+  },
+];
 
 export default function Home() {
+  const [animationDone, setAnimationDone] = useState(false);
+  const handleAnimationComplete = useCallback(() => setAnimationDone(true), []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="relative min-h-screen" style={{ background: "linear-gradient(160deg, #fdf6e3 0%, #f9edcc 40%, #f5e4b0 70%, #fdf6e3 100%)", backgroundAttachment: "fixed" }}>
+
+      {/* Opening cinematic animation */}
+      <OpeningAnimation onComplete={handleAnimationComplete} />
+
+      {/* Only show content after animation */}
+      {animationDone && (
+        <>
+          <TopBanner />
+        
+          {/* floating particles layer */}
+          <ParticleBackground />
+
+          {/* sticky navbar */}
+          <Navbar />
+
+          {/* hero */}
+          <HeroSection />
+
+          {/* 5 department sections */}
+          {DEPARTMENTS.map((dept) => (
+            <DepartmentSection key={dept.id} {...dept} />
+          ))}
+
+          {/* footer */}
+          <Footer />
+        </>
+      )}
+    </main>
   );
 }
