@@ -6,23 +6,23 @@ import Image from "next/image";
 
 const SLIDES = [
   {
-    src: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80",
+    src: "/images/image1.png",
     alt: "Community gathering",
   },
   {
-    src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
+    src: "/images/image2.jpg",
     alt: "Event arrangement",
   },
   {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
+    src: "/images/image3.jpg",
     alt: "Beautiful decoration",
   },
   {
-    src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+    src: "/images/image4.jpg",
     alt: "Audio setup",
   },
   {
-    src: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80",
+    src: "/images/image5.jpg",
     alt: "Cleanliness",
   },
 ];
@@ -80,11 +80,13 @@ export default function HeroSection() {
               transition={{ duration: 1 }}
             >
               <Image
-                src={SLIDES[current].src}
-                alt={SLIDES[current].alt}
-                fill
-                className="object-cover"
-              />
+  src={SLIDES[current].src}
+  alt={SLIDES[current].alt}
+  fill
+  className="object-cover"
+  loading="eager"
+  priority={current === 0}
+/>
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -98,7 +100,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            Kaleemat <span className="text-[#C9A84C]">Nooraniya</span>
+            Kalemat <span className="text-[#C9A84C]">Nooraniya</span>
           </motion.h1>
 
           {/* QUOTE */}

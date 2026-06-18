@@ -58,10 +58,10 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="cursor-pointer">
-          <h1 className="text-xl md:text-2xl font-bold text-yellow-500">
-            Kaleemat{" "}
+          <h1 className="text-xl md:text-2xl font-bold text-[#C9A84C]">
+            Taheri Mohallah{" "}
             <span className="text-white text-sm tracking-widest">
-              NOORANIYA
+              Karachi
             </span>
           </h1>
         </Link>

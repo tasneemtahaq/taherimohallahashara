@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -9,31 +9,91 @@ export default function OpeningAnimation({
 }: {
   onComplete: () => void;
 }) {
-  // phases: tear → ripple → logo → zoom → done
   const [phase, setPhase] = useState<"tear" | "ripple" | "logo" | "zoom" | "done">("tear");
+  const [audioAllowed, setAudioAllowed] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // ── Create audio element once ──
   useEffect(() => {
-    //  tear falls for 4s
-    //  ripple plays for 1.5s
-    //  logo shows for 2.5s
-    //  zoom out for 1.5s
-    //  done
+    const audio = new Audio("/audio/intro.mp3");
+    audio.volume = 0.8;
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
+
+  // ── Animation phase timer ──
+  useEffect(() => {
     const t1 = setTimeout(() => setPhase("ripple"), 4200);
     const t2 = setTimeout(() => setPhase("logo"),   5800);
     const t3 = setTimeout(() => setPhase("zoom"),   8400);
-    const t4 = setTimeout(() => { setPhase("done"); onComplete(); }, 10000);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    const t4 = setTimeout(() => {
+      setPhase("done");
+      onComplete();
+    }, 10000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
   }, [onComplete]);
+
+  // ── Play audio when user taps/clicks (browser requires this) ──
+  const handleUserClick = () => {
+    if (!audioAllowed && audioRef.current) {
+      audioRef.current.play().catch(() => {
+        // browser blocked autoplay — that's okay
+      });
+      setAudioAllowed(true);
+    }
+  };
 
   return (
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
           key="overlay"
-          className="fixed inset-0 z-9999 flex items-center justify-center overflow-hidden"
-          style={{ background: "#000" }}
+          className="fixed inset-0 flex items-center justify-center overflow-hidden cursor-pointer"
+          style={{
+            // ── DARK GREEN BACKGROUND ──
+            background: "linear-gradient(160deg, #001a0e 0%, #003320 40%, #001a0e 100%)",
+            zIndex: 9999,
+          }}
           exit={{ opacity: 0, transition: { duration: 1.2, ease: "easeInOut" } }}
+          onClick={handleUserClick}
         >
+
+          {/* ── Tap to unmute hint (shows for first 3 seconds) ── */}
+          {!audioAllowed && phase === "tear" && (
+            <motion.p
+              className="absolute bottom-16 text-xs tracking-widest uppercase"
+              style={{ color: "rgba(255,255,255,0.35)" }}
+              animate={{ opacity: [0.3, 0.8, 0.3] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              tap anywhere for audio
+            </motion.p>
+          )}
+
+          {/* ── Ambient green glow in background ── */}
+          <motion.div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: "500px",
+              height: "500px",
+              background: "radial-gradient(circle, rgba(0,100,50,0.25) 0%, transparent 70%)",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
 
           {/* ── PHASE 1: Falling Teardrop ── */}
           <AnimatePresence>
@@ -50,7 +110,6 @@ export default function OpeningAnimation({
                   opacity: { duration: 0.6 },
                 }}
               >
-                {/* ── Red Teardrop SVG (3× bigger = 108×168) ── */}
                 <svg
                   width="108"
                   height="168"
@@ -71,7 +130,6 @@ export default function OpeningAnimation({
                         <feMergeNode in="SourceGraphic" />
                       </feMerge>
                     </filter>
-                    {/* clip so Arabic text stays inside teardrop */}
                     <clipPath id="tearClip">
                       <path d="M18 2 C18 2, 34 22, 34 36 C34 45.9 26.8 54 18 54 C9.2 54 2 45.9 2 36 C2 22 18 2 18 2Z" />
                     </clipPath>
@@ -83,11 +141,7 @@ export default function OpeningAnimation({
                     fill="url(#tearGrad)"
                     filter="url(#glow)"
                   />
-
-                  {/* inner highlight */}
                   <ellipse cx="13" cy="26" rx="3.5" ry="6" fill="white" opacity="0.2" />
-
-                  {/* ── Arabic text: يا حسين ── */}
                   <text
                     x="18"
                     y="36"
@@ -98,13 +152,12 @@ export default function OpeningAnimation({
                     fill="white"
                     opacity="0.95"
                     clipPath="url(#tearClip)"
-                    style={{ letterSpacing: "0.02em" }}
                   >
                     يا حسين
                   </text>
                 </svg>
 
-                {/* trailing glow line above the tear */}
+                {/* trailing glow line */}
                 <motion.div
                   className="absolute left-1/2 -translate-x-1/2 bottom-full"
                   style={{
@@ -118,7 +171,7 @@ export default function OpeningAnimation({
             )}
           </AnimatePresence>
 
-          {/* ── PHASE 2: Ripple rings on impact ── */}
+          {/* ── PHASE 2: Ripple rings ── */}
           <AnimatePresence>
             {(phase === "ripple" || phase === "logo") && (
               <motion.div
@@ -156,8 +209,8 @@ export default function OpeningAnimation({
                   width: "200px",
                   height: "200px",
                   border: "2px solid rgba(200,0,0,0.5)",
-                  boxShadow: "0 0 40px rgba(200,0,0,0.3), inset 0 0 40px rgba(0,0,0,0.5)",
-                  background: "rgba(0,0,0,0.7)",
+                  boxShadow: "0 0 60px rgba(0,150,70,0.4), 0 0 40px rgba(200,0,0,0.3), inset 0 0 40px rgba(0,0,0,0.5)",
+                  background: "rgba(0,20,10,0.85)",
                   top: "50%",
                   left: "50%",
                   translateX: "-50%",
@@ -169,43 +222,25 @@ export default function OpeningAnimation({
                 exit={{   scale: 0, opacity: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                {/* ── PUT YOUR LOGO FILE HERE ──
-                    Save your logo as: public/images/logo.png
-                    Then this Image tag will show it automatically */}
-                <Image
-                  src="/images/logo.png"
-                  alt="Logo"
-                  width={160}
-                  height={160}
-                  className="object-contain"
-                  onError={() => {
-                    /* logo not found — fallback text shows */
-                  }}
-                />
-
-                {/* Fallback text (shows only if logo.png is missing) */}
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center"
-                  style={{ opacity: 0 }}
-                >
-                  <span
-                    className="text-2xl font-serif"
-                    style={{ color: "#cc0000" }}
-                  >
-                    يا حسين
-                  </span>
-                </div>
+               <Image
+  src="/images/logo.png"
+  alt="Logo"
+  width={160}
+  height={160}
+  className="object-contain"
+  style={{ width: "auto", height: "auto", maxWidth: "160px", maxHeight: "160px" }}
+/>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* ── PHASE 4: Zoom-in flash before website appears ── */}
+          {/* ── PHASE 4: Fade to dark green then out ── */}
           <AnimatePresence>
             {phase === "zoom" && (
               <motion.div
                 key="zoom-flash"
                 className="absolute inset-0"
-                style={{ background: "#000" }}
+                style={{ background: "#001a0e" }}
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
               />

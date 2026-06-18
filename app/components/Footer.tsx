@@ -56,7 +56,7 @@ export default function Footer() {
               className="text-2xl font-serif font-bold mb-4"
               style={{ color: "#C9A84C" }}
             >
-              Kaleemat Nooraniya
+              Taheri Mohallah Karachi
             </h3>
 
             <p
@@ -156,7 +156,7 @@ export default function Footer() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.4 }}
         >
-          © {new Date().getFullYear()} Kaleemat Nooraniya. All rights reserved.
+          © {new Date().getFullYear()} Taheri Mohallah Karachi. All rights reserved.
         </motion.p>
       </div>
     </footer>

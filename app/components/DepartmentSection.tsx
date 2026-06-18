@@ -162,7 +162,7 @@ export default function DepartmentSection({
 
           {/* image */}
           <motion.div
-            className="relative h-[380px] md:h-[480px] overflow-hidden rounded-xl"
+            className="relative h-95 md:h-120 overflow-hidden rounded-xl"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.4 }}
           >
@@ -174,7 +174,7 @@ export default function DepartmentSection({
               sizes="(max-width: 768px) 100vw, 50vw"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
 
             <div
               className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
