@@ -27,10 +27,7 @@ const SLIDES = [
   },
 ];
 
-const QUOTE_WORDS =
-  "Knowledge enlightens hearts, unity strengthens communities, and service leaves a lasting legacy.".split(
-    " "
-  );
+
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
@@ -103,20 +100,21 @@ export default function HeroSection() {
             Kalemat <span className="text-[#C9A84C]">Nooraniya</span>
           </motion.h1>
 
-          {/* QUOTE */}
-          <div className="flex flex-wrap gap-2">
-            {QUOTE_WORDS.map((word, i) => (
-              <motion.span
-                key={i}
-                className="text-white/60"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.03 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </div>
+         {/* QUOTE IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            <Image
+              src="/images/quote.png"
+              alt="Quotation"
+              width={500}
+              height={200}
+              style={{ width: "100%", height: "auto" }}
+              priority
+            />
+          </motion.div>
 
           {/* CTA BUTTON (FIXED) */}
           <motion.div

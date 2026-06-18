@@ -3,6 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import PhotoAlbum from "./PhotoAlbum";
+
+interface AlbumPhoto {
+  src: string;
+  caption: string;
+}
 
 interface DepartmentSectionProps {
   id: string;
@@ -14,6 +20,7 @@ interface DepartmentSectionProps {
   imageSrc: string;
   imageAlt: string;
   reverse?: boolean;
+  albumPhotos?: AlbumPhoto[];
 }
 
 export default function DepartmentSection({
@@ -26,6 +33,7 @@ export default function DepartmentSection({
   imageSrc,
   imageAlt,
   reverse = false,
+  albumPhotos = [],
 }: DepartmentSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -186,6 +194,14 @@ export default function DepartmentSection({
           </motion.div>
         </motion.div>
       </div>
+
+      {/* ── Photo Album ── */}
+      {albumPhotos.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 pb-24">
+          <PhotoAlbum photos={albumPhotos} departmentTitle={title} />
+        </div>
+      )}
+
     </section>
   );
 }

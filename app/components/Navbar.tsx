@@ -8,9 +8,10 @@ const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Mawaid", href: "#mawaid" },
   { label: "BGT", href: "#bgt" },
-  { label: "Mic Room", href: "#microom" },
+  { label: "Audio/Video", href: "#microom" },
   { label: "Nazafat", href: "#nazafat" },
   { label: "Tazeen", href: "#tazeen" },
+  { label: "Zakireen", href: "#zakireen" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -145,7 +146,7 @@ export default function Navbar() {
             </ul>
 
             <p className="absolute bottom-10 text-white/30 tracking-[0.3em] uppercase text-xs">
-              Kaleemat Nooraniya — All Departments
+              Taheri Mohallah Karachi — All Departments
             </p>
           </motion.div>
         )}

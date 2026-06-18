@@ -9,7 +9,7 @@ const scheherazade = Scheherazade_New({
 });
 
 export const metadata: Metadata = {
-  title: "Kaleemat Nooraniya",
+  title: "Taheri Mohallah Karachi",
   description: "Community departments display website",
 };
 
