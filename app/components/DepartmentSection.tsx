@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import PhotoAlbum from "./PhotoAlbum";
+
 
 interface AlbumPhoto {
   src: string;
@@ -16,11 +16,11 @@ interface DepartmentSectionProps {
   title: string;
   subtitle: string;
   description: string;
-  tags: string[];
   imageSrc: string;
   imageAlt: string;
   reverse?: boolean;
   albumPhotos?: AlbumPhoto[];
+  galleryHref?: string;
 }
 
 export default function DepartmentSection({
@@ -29,11 +29,11 @@ export default function DepartmentSection({
   title,
   subtitle,
   description,
-  tags,
   imageSrc,
   imageAlt,
   reverse = false,
-  albumPhotos = [],
+
+  galleryHref,
 }: DepartmentSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -123,31 +123,7 @@ export default function DepartmentSection({
             {description}
           </p>
 
-          {/* tags */}
-          <div className="flex flex-wrap gap-3">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-4 py-1.5 text-xs tracking-[0.15em] uppercase border transition-all duration-300 cursor-default"
-                style={{
-                  borderColor: "rgba(201,168,76,0.35)",
-                  color: "#C9A84C",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "#C9A84C";
-                  el.style.color = "#000";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "transparent";
-                  el.style.color = "#C9A84C";
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+         
         </motion.div>
 
         {/* IMAGE SECTION */}
@@ -195,13 +171,35 @@ export default function DepartmentSection({
         </motion.div>
       </div>
 
-      {/* ── Photo Album ── */}
-      {albumPhotos.length > 0 && (
+      {/* ── Link to full gallery (photos now live only in gallery page) ── */}
+      {galleryHref && (
         <div className="max-w-7xl mx-auto px-4 pb-24">
-          <PhotoAlbum photos={albumPhotos} departmentTitle={title} />
+          <motion.a
+            href={galleryHref}
+            className="flex items-center gap-4 group cursor-pointer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div
+              className="h-px flex-1"
+              style={{ background: "linear-gradient(to right, transparent, #C9A84C)" }}
+            />
+            <p
+              className="text-xs tracking-[0.35em] uppercase font-medium flex items-center gap-2"
+              style={{ color: "#C9A84C" }}
+            >
+              View Full {title} Gallery
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </p>
+            <div
+              className="h-px flex-1"
+              style={{ background: "linear-gradient(to left, transparent, #C9A84C)" }}
+            />
+          </motion.a>
         </div>
       )}
-
     </section>
   );
 }

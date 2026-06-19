@@ -7,7 +7,10 @@
   --ink:           #a51919;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  
+}
 
 
  body {

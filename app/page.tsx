@@ -8,6 +8,7 @@ import HeroSection       from "./components/HeroSection";
 import DepartmentSection from "./components/DepartmentSection";
 import Footer            from "./components/Footer";
 import TopBanner from "./components/TopBanner";
+import FeedbackSection from "./components/FeedbackSection";
 
 const DEPARTMENTS = [
   {
@@ -16,10 +17,10 @@ const DEPARTMENTS = [
     title:       "Mawaid",
     subtitle:    "Community Meals",
     description: "Managing community meals, food distribution, and event arrangements efficiently.",
-    tags:        ["Dining", "Events", "Community"],
     imageSrc:    "/images/img1.jpg",
     imageAlt:    "Mawaid",
     reverse:     false,
+    galleryHref: "/gallery/mawaid",
     albumPhotos: [
       { src: "/images/mawaid1.jpg", caption: "Community iftar gathering — Ramadan 2024" },
       { src: "/images/mawaid2.jpg", caption: "Food distribution to families in need" },
@@ -35,10 +36,10 @@ const DEPARTMENTS = [
     title:       "BGT",
     subtitle:    "Planning & Coordination",
     description: "Supporting community operations through organized planning and coordination.",
-    tags:        ["Strategy", "Planning", "Operations"],
     imageSrc:    "/images/img2.jpg",
     imageAlt:    "BGT",
     reverse:     true,
+    galleryHref: "/gallery/bgt",
     albumPhotos: [
       { src: "/images/bgt1.jpg", caption: "Strategic planning session — 2024" },
       { src: "/images/bgt2.jpg", caption: "Team coordination meeting" },
@@ -54,10 +55,10 @@ const DEPARTMENTS = [
     title:       "Audio/Video",
     subtitle:    "Audio & Communication",
     description: "Handling audio systems, announcements, and event communication.",
-    tags:        ["Audio", "Media", "Broadcast"],
     imageSrc:    "/images/img3.jpg",
     imageAlt:    "Mic Room",
     reverse:     false,
+    galleryHref: "/gallery/microom",
     albumPhotos: [
       { src: "/images/mic1.jpg", caption: "Live audio setup for main event" },
       { src: "/images/mic2.jpg", caption: "Sound engineer at the mixing board" },
@@ -73,10 +74,10 @@ const DEPARTMENTS = [
     title:       "Nazafat",
     subtitle:    "Cleanliness & Hygiene",
     description: "Maintaining cleanliness, hygiene, and organized surroundings.",
-    tags:        ["Hygiene", "Standards", "Maintenance"],
     imageSrc:    "/images/img4.jpg",
     imageAlt:    "Nazafat",
     reverse:     true,
+    galleryHref: "/gallery/nazafat",
     albumPhotos: [
       { src: "/images/nazafat1.jpg", caption: "Morning cleaning drive by volunteers" },
       { src: "/images/nazafat2.jpg", caption: "Organized waste management system" },
@@ -92,10 +93,10 @@ const DEPARTMENTS = [
     title:       "Tazeen",
     subtitle:    "Décor & Beautification",
     description: "Creating beautiful decorations and enhancing event environments.",
-    tags:        ["Décor", "Design", "Aesthetics"],
     imageSrc:    "/images/img5.jpg",
     imageAlt:    "Tazeen",
     reverse:     false,
+    galleryHref: "/gallery/tazeen",
     albumPhotos: [
       { src: "/images/tazeen1.jpg", caption: "Floral arrangements for main hall" },
       { src: "/images/tazeen2.jpg", caption: "Fabric draping and lighting design" },
@@ -108,21 +109,61 @@ const DEPARTMENTS = [
   },
   {
     id:          "zakireen",
-    number:      "05 — Zakireen",
+    number:      "06 — Zakireen",
     title:       "Zakireen",
-    subtitle:    "Décor & Beautification",
-    description: "Creating beautiful decorations and enhancing event environments.",
-    tags:        ["Décor", "Design", "Aesthetics"],
-    imageSrc:    "/images/img5.jpg",
+    subtitle:    "Izhar un Noha wal Aweel",
+    description: "Zakireen reciting Noha during events.",
+    imageSrc:    "/images/img6.jpg",
     imageAlt:    "zakireen",
     reverse:     false,
+    galleryHref: "/gallery/zakireen",
     albumPhotos: [
-      { src: "/images/zakireen1.jpg", caption: "Floral arrangements for main hall" },
+      { src: "/images/zakireen1.jpg", caption: "Noha Aweel by Zakireen" },
       { src: "/images/zakireen2.jpg", caption: "Fabric draping and lighting design" },
       { src: "/images/zakireen3.jpg", caption: "Thematic installation for annual event" },
       { src: "/images/zakireen4.jpg", caption: "Entrance decoration setup" },
       { src: "/images/zakireen5.jpg", caption: "Stage backdrop creation" },
       { src: "/images/zakireen6.jpg", caption: "Final touches before event opening" },
+    ],
+    
+  },
+  {
+    id:          "its",
+    number:      "07 — ITS",
+    title:       "ITS",
+    subtitle:    "Its Card Scaning",
+    description: "Performing ITS card scanning and Daily attendance tracking.",
+    imageSrc:    "/images/img7.jpg",
+    imageAlt:    "its",
+    reverse:     false,
+    galleryHref: "/gallery/its",
+    albumPhotos: [
+      { src: "/images/its1.jpg", caption: "ITS Scanning " },
+      { src: "/images/its2.jpg", caption: "ITS Scanning" },
+      { src: "/images/its3.jpg", caption: "ITS Card Scanning" },
+      { src: "/images/its4.jpg", caption: "KhitmatGuzar" },
+      { src: "/images/its5.jpg", caption: "KhitmatGuzar" },
+      { src: "/images/its6.jpg", caption: "Daily Attendance Tracking" },
+    ],
+    
+  },
+  {
+    id:          "daana",
+    number:      "08 — Daana",
+    title:       "Daana Committee",
+    subtitle:    "Community Meals and Food Distribution",
+    description: "Providing community meals and distributing food to families in need.",
+    imageSrc:    "/images/img8.jpg",
+    imageAlt:    "daana",
+    reverse:     false,
+    galleryHref: "/gallery/daanacomittee",
+    albumPhotos: [
+      { src: "/images/daana1.jpg", caption: "Daana Committee" },
+      { src: "/images/daana2.jpg", caption: "Community Meals" },
+      { src: "/images/daana3.jpg", caption: "Food Distribution" },
+      { src: "/images/daana4.jpg", caption: "Event Arrangements" },
+      { src: "/images/daana5.jpg", caption: "KhitmatGuzar" },
+      { src: "/images/daana6.jpg", caption: "Daily Attendance Tracking" },
     ],
     
   },
@@ -156,6 +197,9 @@ export default function Home() {
           {DEPARTMENTS.map((dept) => (
             <DepartmentSection key={dept.id} {...dept} />
           ))}
+
+          {/* feedback & rating */}
+          <FeedbackSection />
 
           {/* footer */}
           <Footer />

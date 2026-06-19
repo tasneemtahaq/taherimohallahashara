@@ -7,23 +7,23 @@ import Image from "next/image";
 const SLIDES = [
   {
     src: "/images/image1.png",
-    alt: "Community gathering",
+    alt: "img1",
   },
   {
     src: "/images/image2.jpg",
-    alt: "Event arrangement",
+    alt: "img2",
   },
   {
     src: "/images/image3.jpg",
-    alt: "Beautiful decoration",
+    alt: "img3",
   },
   {
     src: "/images/image4.jpg",
-    alt: "Audio setup",
+    alt: "img4",
   },
   {
     src: "/images/image5.jpg",
-    alt: "Cleanliness",
+    alt: "img5",
   },
 ];
 

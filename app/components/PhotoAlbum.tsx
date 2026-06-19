@@ -12,9 +12,10 @@ interface Photo {
 interface PhotoAlbumProps {
   photos: Photo[];
   departmentTitle: string;
+  galleryHref?: string;
 }
 
-export default function PhotoAlbum({ photos, departmentTitle }: PhotoAlbumProps) {
+export default function PhotoAlbum({ photos, departmentTitle, galleryHref }: PhotoAlbumProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const openPhoto = (index: number) => setSelectedIndex(index);
@@ -30,8 +31,10 @@ export default function PhotoAlbum({ photos, departmentTitle }: PhotoAlbumProps)
     <div className="w-full mt-16">
 
       {/* ── Album Header ── */}
-      <motion.div
-        className="flex items-center gap-4 mb-8"
+      {/* ── Album Header (clickable link to full gallery page) ── */}
+      <motion.a
+        href={galleryHref || "#"}
+        className="flex items-center gap-4 mb-8 group cursor-pointer"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -44,10 +47,11 @@ export default function PhotoAlbum({ photos, departmentTitle }: PhotoAlbumProps)
           }}
         />
         <p
-          className="text-xs tracking-[0.35em] uppercase font-medium"
+          className="text-xs tracking-[0.35em] uppercase font-medium transition-colors duration-300 group-hover:opacity-80 flex items-center gap-2"
           style={{ color: "#C9A84C" }}
         >
           {departmentTitle} — Gallery
+          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </p>
         <div
           className="h-px flex-1"
@@ -55,7 +59,7 @@ export default function PhotoAlbum({ photos, departmentTitle }: PhotoAlbumProps)
             background: "linear-gradient(to left, transparent, #C9A84C)",
           }}
         />
-      </motion.div>
+      </motion.a>
 
       {/* ── Masonry Grid ── */}
       <div className="columns-2 md:columns-3 gap-4 space-y-4">
