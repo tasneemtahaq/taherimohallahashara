@@ -9,13 +9,14 @@ const QUICK_LINKS = [
   { label: "Mic Room", id: "microom" },
   { label: "Nazafat", id: "nazafat" },
   { label: "Tazeen", id: "tazeen" },
+  { label: "Zakireen", id: "zakireen" },
+  { label: "ITS", id: "its" },
+  { label: "DaanaComittee", id: "daana" },
 ];
 
 const SOCIAL = [
   { label: "Facebook", href: "#", icon: "f" },
-  { label: "Instagram", href: "#", icon: "in" },
-  { label: "Twitter", href: "#", icon: "tw" },
-  { label: "YouTube", href: "#", icon: "yt" },
+  
 ];
 
 export default function Footer() {
@@ -64,7 +65,7 @@ export default function Footer() {
               style={{ color: "rgba(255,255,255,0.5)" }}
             >
               A unified platform dedicated to community service, culture, and
-              excellence across all five departments.
+              excellence across all departments.
             </p>
           </motion.div>
 
