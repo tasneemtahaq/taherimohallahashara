@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "923312287497";
+const WHATSAPP_NUMBER = "923332226672";
 
 export default function FeedbackSection() {
   const [itsNumber, setItsNumber] = useState("");

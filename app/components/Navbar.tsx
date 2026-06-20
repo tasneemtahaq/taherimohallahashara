@@ -12,6 +12,8 @@ const NAV_LINKS = [
   { label: "Nazafat", href: "#nazafat" },
   { label: "Tazeen", href: "#tazeen" },
   { label: "Zakireen", href: "#zakireen" },
+  { label: "ITS", href: "#its" },
+  { label: "DaanaComittee", href: "#daana" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -59,7 +61,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="cursor-pointer">
-          <h1 className="text-xl md:text-2xl font-bold text-[#C9A84C]">
+          <h1 className="text-xl, md:text-lg font-bold text-[#C9A84C]">
             Taheri Mohallah{" "}
             <span className="text-white text-sm tracking-widest">
               Karachi
@@ -131,7 +133,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="group text-3xl md:text-5xl text-white hover:text-yellow-500 transition-colors duration-300"
+                    className="group text-xl md:text-gigitxl text-white hover:text-yellow-500 transition-colors duration-300"
                   >
                     <span className="text-yellow-500 mr-4 text-sm">
                       {String(index + 1).padStart(2, "0")}
